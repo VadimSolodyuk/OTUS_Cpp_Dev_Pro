@@ -1,4 +1,4 @@
-name: 'helloworld'
+name: 'hw_01-helloworld'
 
 on:
   push:

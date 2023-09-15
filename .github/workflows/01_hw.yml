@@ -1,4 +1,4 @@
-name: 'hw_01'
+name: 'helloworld'
 
 on:
   push:
@@ -25,7 +25,6 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # 01_hw:
         with:
           tag_name: hw_01.${{ github.run_number }}
           release_name: Release hw_01.${{ github.run_number }}
@@ -38,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./helloworld_cli-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: helloworld_cli-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./helloworld-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package

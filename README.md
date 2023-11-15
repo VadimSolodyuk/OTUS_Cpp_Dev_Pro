@@ -11,4 +11,5 @@
   - наименование исполняемого бинарного файла "ip_filter".
 
 3. ДЗ-03 (branch - "03_hw"):
+  - пакет для установки "my_vector_with_my_allocator-0.0.X-Linux.deb" расположен в "Releases/Release hw_03.X", где X - номер версии;
   - наименование исполняемого бинарного файла "my_vector_with_my_allocator".

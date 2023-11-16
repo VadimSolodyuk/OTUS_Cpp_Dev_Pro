@@ -15,11 +15,10 @@ struct my_allocator {
     using value_type = T;
 
     static constexpr std::size_t PoolSize = N;
-    int allocated_Size{};
+    int allocated_Size;
     std::shared_ptr<void> pool;
 
-    my_allocator () noexcept  
-        : pool(::operator new (sizeof(T) * PoolSize), deleter()) {}
+    my_allocator () noexcept = default;  
 
     template <class U, std::size_t M>
     my_allocator(const my_allocator <U, M>& a) noexcept {
@@ -31,7 +30,9 @@ struct my_allocator {
     }
 
     T* allocate (std::size_t n) {
-        if (pool == nullptr || n > (PoolSize - allocated_Size))
+        if (pool == nullptr)
+            pool = std::shared_ptr<void>(::operator new (sizeof(T) * PoolSize), deleter());
+        if(n > (PoolSize - allocated_Size))
             throw std::bad_alloc{};
         auto ptr = (char*)pool.get() + allocated_Size * sizeof(T);        
         allocated_Size += n;

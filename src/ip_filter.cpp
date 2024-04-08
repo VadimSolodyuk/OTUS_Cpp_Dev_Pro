@@ -8,9 +8,7 @@ int main()
         std::vector<IP> ip_pool;
 
         for(std::string line; std::getline(std::cin, line);) {
-            auto ip = [](std::string && line) {
-                return line.substr(0, line.find_first_of('\t'));
-            } (std::move(line));
+            auto ip = line.substr(0, line.find_first_of('\t'));
             ip_pool.emplace_back(std::move(ip));
         }
 

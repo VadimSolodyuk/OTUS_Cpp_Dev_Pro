@@ -3,6 +3,7 @@
 В данном репозитории расположены домашние задания (ДЗ), выполненные в рамках обучения в OTUS на курсе C++ Developer. Professional.
 
 1. ДЗ-01 (branch - "01_hw"):
+  - задание: https://otusbook.notion.site/1-40776b15ad9d44cca6d3392d0c42806e ;
   - пакет для установки "helloworld_cli-0.0.X-Linux.deb" расположен в "Releases/Release hw_01.X", где X - номер версии;
   - наименование исполняемого бинарного файла "helloworld_cli".
 

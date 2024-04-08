@@ -11,12 +11,12 @@ set_target_properties(lib_for_ip_filter PROPERTIES
     CXX_STANDARD_REQUIRED ON
 )
 
-# if (MSVC)
-#     target_compile_options(lib_ip_filter PRIVATE
-#         /W4
-#     )
-# else ()
-#     target_compile_options(lib_ip_filter PRIVATE
-#         -Wall -Wextra -pedantic -Werror
-#     )
-# endif()
+ if (MSVC)
+     target_compile_options(lib_ip_filter PRIVATE
+         /W4
+     )
+ else ()
+     target_compile_options(lib_ip_filter PRIVATE
+         -Wall -Wextra -pedantic -Werror
+     )
+ endif()

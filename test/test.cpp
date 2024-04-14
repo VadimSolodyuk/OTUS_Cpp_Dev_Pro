@@ -52,9 +52,7 @@ struct filter_IP : public testing::Test{
             return;
         }
         for(std::string line; std::getline(list_IP, line);) {
-            auto ip = [](std::string && line) {
-                return line.substr(0, line.find_first_of('\t'));
-            } (std::move(line));
+            auto ip = line.substr(0, line.find_first_of('\t'));
             ip_pool.emplace_back(std::move(ip));
         }
         std::sort(ip_pool.begin(), ip_pool.end(),

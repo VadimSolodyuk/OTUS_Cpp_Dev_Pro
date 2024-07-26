@@ -64,7 +64,12 @@ struct filter_IP : public testing::Test{
 
 TEST_F(filter_IP, filter_by_first_byte){
     filter_by_first_byte(ip_pool, 1, ip_stream);
-    for(std::string line; std::getline(ip_stream, line);) {
+        
+    //DRY
+
+
+    
+    for(std::string line; std::getline(ip_stream, line);) { 
         [this](std::string & line) {
             IP_after_filter.emplace_back(line);
         }(line);

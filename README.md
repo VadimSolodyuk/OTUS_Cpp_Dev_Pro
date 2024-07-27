@@ -13,6 +13,7 @@
   - наименование исполняемого бинарного файла "ip_filter".
 
 3. ДЗ-03 (branch - "03_hw"):
+  - задание: https://otusbook.notion.site/3-Allocator-5e1e99afe3b041d9aa9858c5cb2816fc;
   - пакет для установки "my_vector_with_my_allocator-0.0.X-Linux.deb" расположен в "Releases/Release hw_03.X", где X - номер версии;
   - наименование исполняемого бинарного файла "my_vector_with_my_allocator".
 

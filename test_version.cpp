@@ -1,7 +1,7 @@
 #include "lib.h"
 
 #include <gtest/gtest.h>
-#include <iostream>
+// #include <iostream>
 
 TEST(homework, version)
 {

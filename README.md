@@ -18,6 +18,7 @@
   - наименование исполняемого бинарного файла "my_vector_with_my_allocator".
 
 4. ДЗ-04 (branch - "04_hw"):
+  - задание: https://otusbook.notion.site/4-SFINAE-Doxygen-a994109dc5da4566a5f11c74abbbb241;
   - пакет для установки "print_ip-0.0.X-Linux.deb" расположен в "Releases/Release hw_04.X", где X - номер версии;
   - наименование исполняемого бинарного файла "print_ip".
 

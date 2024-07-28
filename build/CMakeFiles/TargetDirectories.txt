@@ -1,9 +1,0 @@
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/matrix.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/package.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/package_source.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/edit_cache.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/rebuild_cache.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/list_install_components.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/install.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/install/local.dir
-/home/vadim/Документы/Training/OTUS/Нomework/P6-Matrix/build/CMakeFiles/install/strip.dir

@@ -30,6 +30,7 @@ public:
 			return pair.first->second;
 		}
 	};
+	
 /////////////////////////////////////////////////////////////////TODO
 	struct Iterator {
 		Iterator(bool isBegin, std::map<int, Row>& data) : m_data(data) {

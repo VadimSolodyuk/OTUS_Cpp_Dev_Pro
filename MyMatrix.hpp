@@ -8,6 +8,10 @@
 
 
 template<typename T> class MyMatrix {
+	MyMatrix() = default;
+public:
+	~MyMatrix() = default;
+	
 	using DataRow = std::map<size_t, T>;
 	using IteratorDataRow = typename std::map<size_t, T>::iterator;
 
@@ -15,9 +19,7 @@ template<typename T> class MyMatrix {
 	using IteratorSetDataRow = typename std::map<size_t, DataRow>::iterator;
 	
 	template<typename A, A> friend class MyMatrixProxy;
-	MyMatrix() = default;
 
-public:
 	std::shared_ptr<MyMatrix<T>> create() {
 		auto myMatrix = std::shared_ptr<MyMatrix<T>>();
 		return myMatrix;
@@ -25,10 +27,10 @@ public:
 
 //	TODO
 	class Iterator : public std::iterator_traits<std::forward_iterator_tag> {
+		using Iter = typename MyMatrix<T>::Iterator;
 		SetDataRow& _matrix;
 		IteratorSetDataRow iteratorSetDataRow {_matrix.begin()}; 
 		IteratorDataRow iteratorDataRow {_matrix.begin()->second.begin()}; 
-		using Iter = typename MyMatrix<T>::Iterator;
 	public:
 		Iterator(SetDataRow& matrix) : _matrix(matrix) {};
 		
@@ -69,9 +71,9 @@ public:
 
 		Iter& operator++() {
 			++iteratorDataRow;
-			if (iteratorDataRow == iteratorDataRow.end()) {
+			if (iteratorDataRow == iteratorSetDataRow->second.end()) {
 				++iteratorSetDataRow;
-				iteratorDataRow.begin();
+				iteratorDataRow = iteratorSetDataRow->second.begin();
 				if (this == this->end()) return this;
 			};
 			return this;

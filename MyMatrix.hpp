@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <iterator>
 #include <map>
 #include <memory>
 #include <tuple>
@@ -10,8 +9,10 @@
 template<typename T> class MyMatrix {
 	MyMatrix() = default;
 public:
-	~MyMatrix() = default;
-	
+	class Iterator;
+	friend class Iterator;
+	using Iterator = MyMatrix<T>::Iterator;
+
 	using DataRow = std::map<size_t, T>;
 	using IteratorDataRow = typename std::map<size_t, T>::iterator;
 
@@ -20,32 +21,28 @@ public:
 	
 	template<typename A, A> friend class MyMatrixProxy;
 
-	std::shared_ptr<MyMatrix<T>> create() {
+	~MyMatrix() = default;
+
+	static std::shared_ptr<MyMatrix<T>> create() {
 		auto myMatrix = std::shared_ptr<MyMatrix<T>>();
 		return myMatrix;
-	};
-
-//	TODO
+	}
 	class Iterator : public std::iterator_traits<std::forward_iterator_tag> {
-		using Iter = typename MyMatrix<T>::Iterator;
 		SetDataRow& _matrix;
 		IteratorSetDataRow iteratorSetDataRow {_matrix.begin()}; 
 		IteratorDataRow iteratorDataRow {_matrix.begin()->second.begin()}; 
 	public:
 		Iterator(SetDataRow& matrix) : _matrix(matrix) {};
-		
-		Iter& begin() {
+		Iterator& begin() {
 			iteratorSetDataRow = _matrix.begin(); 
 			iteratorDataRow = _matrix.begin()->second.begin(); 
 			return this;
 		}
-		
-		Iter& end() {
+		Iterator& end() {
 			iteratorSetDataRow = _matrix.end(); 
 			iteratorDataRow = _matrix.end()->second.end(); 
 			return this;
 		}
-
 		auto operator*() const {
       		return std::make_tuple
 				(
@@ -54,22 +51,19 @@ public:
 					iteratorDataRow->second
 				);
 	    }
-
-		bool operator!=(const Iter& rhs) const {
+		bool operator!=(const Iterator& rhs) const {
 			return 
 				this->iteratorDataRow != rhs.iteratorDataRow
 				&&
 				this->iteratorSetDataRow != rhs.iteratorSetDataRow;
 		}
-
-		bool operator==(const Iter& rhs) const {
+		bool operator==(const Iterator& rhs) const {
 			return 
 				this->iteratorDataRow == rhs.iteratorDataRow
 				&&
 				this->iteratorSetDataRow == rhs.iteratorSetDataRow;
 		}
-
-		Iter& operator++() {
+		Iterator& operator++() {
 			++iteratorDataRow;
 			if (iteratorDataRow == iteratorSetDataRow->second.end()) {
 				++iteratorSetDataRow;
@@ -79,31 +73,26 @@ public:
 			return this;
 		}
 	};	
-	friend class MyMatrix<T>::Iterator;
+//	TODO
 
+	DataRow& operator[](size_t row) {return m_matrix[row];}
+	// 	Row& operator[] (int row) {
+	// 		return m_data[row];
+	// 	}
+
+	Iterator begin() {
+		return Iterator(m_matrix);
+	}
+	Iterator end() {
+		Iterator iterator(m_matrix);
+		iterator.end();
+		return iterator;
+	}
+	
 	// std::size_t size() {
 	// 	calcSize();
 	// 	return m_size;
 	// }
-
-// 	const Row& operator[] (int row) const {
-// 		if (auto iter = m_data.find(row); iter != m_data.end()) {
-// 			return iter->second;
-// 		}
-// 		return emptyLine_;
-// 	}
-
-// 	Row& operator[] (int row) {
-// 		return m_data[row];
-// 	}
-
-// 	Iterator begin() {
-// 		return Iterator(true, m_data);
-// 	}
-
-// 	Iterator end() {
-// 		return Iterator(false, m_data);
-// 	}
 
 // 	void calcSize() {
 // 		m_size = 0;
@@ -114,7 +103,6 @@ public:
 // 		}
 // 	}
 private:
-
 	SetDataRow m_matrix; 
 	std::size_t m_size = 0;
 };

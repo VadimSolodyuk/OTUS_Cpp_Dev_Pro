@@ -24,7 +24,7 @@ public:
 	~MyMatrix() = default;
 
 	static std::shared_ptr<MyMatrix<T>> create() {
-		auto myMatrix = std::shared_ptr<MyMatrix<T>>();
+		auto myMatrix = std::make_shared<MyMatrix<T>>();
 		return myMatrix;
 	}
 	class Iterator : public std::iterator_traits<std::forward_iterator_tag> {

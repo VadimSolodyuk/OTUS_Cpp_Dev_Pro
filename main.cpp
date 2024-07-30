@@ -7,6 +7,7 @@
 int main() {
 	auto matrix = MyMatrix<int>::create();
 	auto it = matrix->begin();
+	matrix.get()->[1][2] = 3;
 	
 	// {
 	// 	MyMatrix<int, -1> matrix;

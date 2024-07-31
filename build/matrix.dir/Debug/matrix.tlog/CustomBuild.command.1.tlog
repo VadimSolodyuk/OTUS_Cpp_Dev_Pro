@@ -1,0 +1,10 @@
+^C:\USERS\V.SOLODYUK\DOCUMENTS\TRAINING\OTUS\НOMEWORK\P6_MATRIX\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix -BC:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build --check-stamp-file C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

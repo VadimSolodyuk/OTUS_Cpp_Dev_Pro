@@ -1,13 +1,6 @@
+
 build/
-/build
-\build
-#.vscode/
-build/
-build\
-#.vscode/
-/build/
-\build\
-#/.vscode/
+.vscode/
 
 CMakeLists.txt.user
 CMakeCache.txt

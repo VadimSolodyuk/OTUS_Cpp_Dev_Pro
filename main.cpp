@@ -10,7 +10,8 @@ int main() {
 	// auto matrix = MyMatrix<int>::create();
 	
 	{
-		MyMatrix<int> matrix;
+		auto matrixPtr = MyMatrix<int>::create();
+		auto matrix = *matrixPtr.get();
 		assert(matrix.size() == 0);
 	// 	auto a = matrix[0][0];
 	// 	assert(a == -1);
@@ -26,19 +27,19 @@ int main() {
 		std::cout << a << std::endl;
 	}
 
-	// {
-	// 	MyMatrix<int, -1> matrix;
-	// 	assert(matrix.size() == 0);
-	// 	auto a = matrix[0][0];
-	// 	assert(a == -1);
-	// 	assert(matrix.size() == 1);
-	// 	matrix[100][100] = 314;
-	// 	assert(matrix[100][100] == 314);
-	// 	assert(matrix.size() == 2);
-	// 	matrix[100][100] = -1;
-	// 	assert(matrix[100][100] == -1);
-	// 	assert(matrix.size() == 2);
-	// }
+	{
+		Matrix<int, -1> matrix;
+		assert(matrix.size() == 0);
+		auto a = matrix[0][0];
+		// assert(a == -1);
+		// assert(matrix.size() == 1);
+		// matrix[100][100] = 314;
+		// assert(matrix[100][100] == 314);
+		// assert(matrix.size() == 2);
+		// matrix[100][100] = -1;
+		// assert(matrix[100][100] == -1);
+		// assert(matrix.size() == 2);
+	}
 
 	// {
 	// 	MyMatrix<int, -2> matrix;

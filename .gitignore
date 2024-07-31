@@ -1,7 +1,9 @@
 *build/
 *.vscode/
-#build/
-#.vscode/
+build/
+.vscode/
+/build/
+/.vscode/
 
 CMakeLists.txt.user
 CMakeCache.txt

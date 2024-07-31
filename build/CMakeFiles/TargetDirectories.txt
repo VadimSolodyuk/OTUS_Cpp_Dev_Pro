@@ -1,0 +1,5 @@
+C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/matrix.dir
+C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/PACKAGE.dir
+C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/INSTALL.dir
+C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/V.Solodyuk/Documents/training/OTUS/Нomework/P6_Matrix/build/CMakeFiles/ZERO_CHECK.dir

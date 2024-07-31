@@ -1,14 +1,16 @@
 #pragma once
 
+#include <algorithm>
 #include <cstddef>
 #include <map>
-#include <memory>
+// #include <memory>
 #include <tuple>
 
 
 template<typename T> class MyMatrix {
-	MyMatrix() = default;
 public:
+	MyMatrix() = default;
+	
 	class Iterator;
 	friend class Iterator;
 	using Iterator = MyMatrix<T>::Iterator;
@@ -23,10 +25,10 @@ public:
 
 	~MyMatrix() = default;
 
-	static std::shared_ptr<MyMatrix<T>> create() {
-		auto myMatrix = std::make_shared<MyMatrix<T>>();
-		return myMatrix;
-	}
+	// static std::shared_ptr<MyMatrix<T>> create() {
+	// 	auto myMatrix = std::make_shared<MyMatrix<T>>();
+	// 	return myMatrix;
+	// }
 	class Iterator : public std::iterator_traits<std::forward_iterator_tag> {
 		SetDataRow& _matrix;
 		IteratorSetDataRow iteratorSetDataRow {_matrix.begin()}; 
@@ -73,7 +75,6 @@ public:
 			return this;
 		}
 	};	
-//	TODO
 
 	DataRow& operator[](size_t row) {return m_matrix[row];}
 	// 	Row& operator[] (int row) {
@@ -89,10 +90,13 @@ public:
 		return iterator;
 	}
 	
-	// std::size_t size() {
-	// 	calcSize();
-	// 	return m_size;
-	// }
+	std::size_t size() {
+		size_t size = 0;
+		std::for_each(m_matrix.begin(), m_matrix.end(),
+			[&size](auto &x){size += x.second.size();}
+		);
+		return size;
+	}
 
 // 	void calcSize() {
 // 		m_size = 0;
@@ -104,7 +108,6 @@ public:
 // 	}
 private:
 	SetDataRow m_matrix; 
-	std::size_t m_size = 0;
 };
 
 

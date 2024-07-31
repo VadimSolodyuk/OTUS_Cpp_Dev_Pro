@@ -2,13 +2,30 @@
 
 #include <cassert>
 #include <iostream>
+#include <iterator>
+#include <ostream>
 
 
 int main() {
-	auto matrix = MyMatrix<int>::create();
-	auto it = matrix->begin();
-	matrix.get()->[1][2] = 3;
+	// auto matrix = MyMatrix<int>::create();
 	
+	{
+		MyMatrix<int> matrix;
+		assert(matrix.size() == 0);
+	// 	auto a = matrix[0][0];
+	// 	assert(a == -1);
+	// 	assert(matrix.size() == 1);
+		matrix[100][100] = 314;
+		assert(matrix[100][100] == 314);
+		assert(matrix.size() == 1);	//
+	// 	assert(matrix.size() == 2);
+		matrix[1][1] = -1;
+		assert(matrix[1][1] == -1);
+		assert(matrix.size() == 2);
+		auto a = matrix.size();
+		std::cout << a << std::endl;
+	}
+
 	// {
 	// 	MyMatrix<int, -1> matrix;
 	// 	assert(matrix.size() == 0);

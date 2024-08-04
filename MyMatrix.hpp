@@ -5,16 +5,17 @@
 #include <map>
 #include <memory>
 #include <tuple>
+#include <iostream>
 
-template<typename T> class MyMatrix {
+template<typename T, T defaultValue> class MyMatrix {
 	MyMatrix() = default;
 public:
+	~MyMatrix() = default;
 	
 	class Iterator;
-	// friend class Iterator;
-	using Iterator = MyMatrix<T>::Iterator;
+	using Iterator = MyMatrix<T, defaultValue>::Iterator;
 
-	using DataRow = std::map<size_t, T>;
+	struct DataRow;
 	using IteratorDataRow = typename std::map<size_t, T>::iterator;
 
 	using SetDataRow = std::map<size_t, DataRow>;
@@ -22,13 +23,42 @@ public:
 	
 	template<typename A, A> friend class Matrix;
 
-	~MyMatrix() = default;
 
-	static std::shared_ptr<MyMatrix<T>> create() {
-		auto myMatrix = std::shared_ptr<MyMatrix<T>>(new MyMatrix<T>{});
+	static std::shared_ptr<MyMatrix<T, defaultValue>> create() {
+		auto myMatrix = std::shared_ptr<MyMatrix<T, defaultValue>>(new MyMatrix<T, defaultValue>{});
 		return myMatrix;
 	}
-	class Iterator : public std::iterator_traits<std::forward_iterator_tag> {
+
+	struct DataRow {
+		std::map<size_t, T> dataRow;
+
+		T& operator[](const size_t& column){	
+			if (dataRow.count(column) != 0) {
+				return dataRow.at(column);
+			} 
+			auto pair = dataRow.emplace(column, defaultValue); 				
+			return pair.first->second; 
+		}
+
+		const size_t size() {
+			if (dataRow.empty()) return 0;
+			// for (auto it : dataRow) {
+			for (auto it = dataRow.begin(); it != dataRow.end();) {
+std::cout << "DataRow.size" << std::endl;
+				if (it->second == defaultValue) {
+					dataRow.erase(it++);
+					if (dataRow.empty()) break;
+				}
+				++it;
+			}
+			return dataRow.size();
+		}		
+
+		auto begin() {return dataRow.begin();}
+		auto end() {return dataRow.end();}
+	};
+
+	class Iterator {
 		SetDataRow& _matrix;
 		IteratorSetDataRow iteratorSetDataRow {_matrix.begin()}; 
 		IteratorDataRow iteratorDataRow {_matrix.begin()->second.begin()}; 
@@ -37,15 +67,16 @@ public:
 		Iterator& begin() {
 			iteratorSetDataRow = _matrix.begin(); 
 			iteratorDataRow = _matrix.begin()->second.begin(); 
-			return this;
+			return *this;
 		}
 		Iterator& end() {
 			iteratorSetDataRow = _matrix.end(); 
 			iteratorDataRow = _matrix.end()->second.end(); 
-			return this;
+			return *this;
 		}
 		auto operator*() const {
-      		return std::make_tuple
+std::cout << "operator*" << std::endl;
+			return std::make_tuple
 				(
 					iteratorSetDataRow->first,
 					iteratorDataRow->first,
@@ -69,15 +100,13 @@ public:
 			if (iteratorDataRow == iteratorSetDataRow->second.end()) {
 				++iteratorSetDataRow;
 				iteratorDataRow = iteratorSetDataRow->second.begin();
-				if (this == this->end()) return this;
+				if (*this == this->end()) return *this;
 			};
-			return this;
+			return *this;
 		}
 	};	
 
 	DataRow& operator[](size_t row) {return m_matrix[row];}
-	const DataRow& operator[](size_t row) const {return m_matrix[row];}
-
 
 	Iterator begin() {return Iterator(m_matrix);}
 	Iterator end() {
@@ -86,10 +115,10 @@ public:
 		return iterator;
 	}
 	
-	std::size_t size() {
+	const size_t size() {
 		size_t size{};
 		std::for_each(m_matrix.begin(), m_matrix.end(),
-			[&size](auto &x){size += x.second.size();}
+			[&size](auto x){size += x.second.size();}
 		);
 		return size;
 	}
@@ -99,64 +128,26 @@ private:
 
 
 template<typename T, T defaultValue> class Matrix {
-	using MatrixMy = MyMatrix<T>; 
+	using MatrixMy = MyMatrix<T,defaultValue>; 
 	std::shared_ptr<MatrixMy> m_myMayrixPrt;
-	MatrixMy m_myMayrix;
+	MatrixMy m_matrix;
 public:
 	Matrix() {
 		m_myMayrixPrt = MatrixMy::create();
-		m_myMayrix = *m_myMayrixPrt.get();
+		m_matrix = *m_myMayrixPrt.get();
 	}
 
-	std::size_t size() {return m_myMayrix.size();}
+	std::size_t size() {return m_matrix.size();}
 
-// 	auto& operator[] (size_t row) {return m_myMayrix[row];}
-	const auto& operator[] (size_t row) const { return m_myMayrix.operator[](row);}
+	auto& operator[] (size_t row) {return m_matrix[row];}
 
-// // 	const typename MyMatrix<T, defaultValue>::Row& operator[] (int row) const {
-// // 		return matrix_.operator[](row);
-// // 	}
+	auto begin() {
+		size();
+		return m_matrix.begin();
+	}
 
-// // 	typename MyMatrix<T, defaultValue>::Row& operator[] (int row) {
-// // 		isSizeMaybeChanged = true;
-// // 		return matrix_.operator[](row);
-// // 	}
-
-// 	auto begin() {return m_myMayrix.begin();}
-
-
-// // 	typename MyMatrix<T, defaultValue>::Iterator begin() {
-// // 		adjustSize();
-// // 		return matrix_.begin();
-// // 	}
-
-// 	auto end() {return m_myMayrix.end();}
-
-// // 	typename MyMatrix<T, defaultValue>::Iterator end() {
-// // 		adjustSize();
-// // 		return matrix_.end();
-// // 	}
-
-// // private:
-// // 	void adjustSize() {
-// // 		if (isSizeMaybeChanged) {
-// // 			for (auto iter = matrix_.m_data.begin(); iter != matrix_.m_data.end(); ) {
-// // 				for (auto itt = iter->second.dataRow.begin(); itt != iter->second.dataRow.end(); ) {
-// // 					if (itt->second != defaultValue) {
-// // 						++itt;
-// // 					} else {
-// // 						itt = iter->second.dataRow.erase(itt);
-// // 					}
-// // 				}
-
-// 				if (iter->second.dataRow.empty()) {
-// 					iter = matrix_.m_data.erase(iter);
-// 				} else {
-// 					++iter;
-// 				}
-// 			}
-
-// 			isSizeMaybeChanged = false;
-// 		}
-// 	}
+	auto end() {
+		size();
+		return m_matrix.end();
+	}
 };

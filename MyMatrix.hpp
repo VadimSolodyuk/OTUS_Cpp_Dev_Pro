@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <iterator>
 #include <map>
 #include <memory>
 #include <tuple>
@@ -23,7 +24,6 @@ public:
 	
 	template<typename A, A> friend class Matrix;
 
-
 	static std::shared_ptr<MyMatrix<T, defaultValue>> create() {
 		auto myMatrix = std::shared_ptr<MyMatrix<T, defaultValue>>(new MyMatrix<T, defaultValue>{});
 		return myMatrix;
@@ -41,16 +41,16 @@ public:
 		}
 
 		const size_t size() {
-			if (dataRow.empty()) return 0;
-			// for (auto it : dataRow) {
-			for (auto it = dataRow.begin(); it != dataRow.end();) {
-std::cout << "DataRow.size" << std::endl;
-				if (it->second == defaultValue) {
-					dataRow.erase(it++);
-					if (dataRow.empty()) break;
-				}
-				++it;
-			}
+// 			if (dataRow.empty()) return 0;
+// 			// for (auto it : dataRow) {
+// 			for (auto it = dataRow.begin(); it != dataRow.end();) {
+// // std::cout << "DataRow.size" << std::endl;
+// 				if (it->second == defaultValue) {
+// 					dataRow.erase(it++);
+// 					if (dataRow.empty()) break;
+// 				}
+// 				++it;
+// 			}
 			return dataRow.size();
 		}		
 
@@ -58,20 +58,36 @@ std::cout << "DataRow.size" << std::endl;
 		auto end() {return dataRow.end();}
 	};
 
-	class Iterator {
+	class Iterator  { //: std::iterator_traits<std::forward_iterator_tag>
 		SetDataRow& _matrix;
 		IteratorSetDataRow iteratorSetDataRow {_matrix.begin()}; 
-		IteratorDataRow iteratorDataRow {_matrix.begin()->second.begin()}; 
+		IteratorDataRow iteratorDataRow {iteratorSetDataRow->second.begin()}; 
 	public:
 		Iterator(SetDataRow& matrix) : _matrix(matrix) {};
-		Iterator& begin() {
-			iteratorSetDataRow = _matrix.begin(); 
-			iteratorDataRow = _matrix.begin()->second.begin(); 
+		Iterator& finish() {
+			iteratorSetDataRow = _matrix.end(); 
+			iteratorDataRow = _matrix.rbegin()->second.end(); 
 			return *this;
 		}
-		Iterator& end() {
-			iteratorSetDataRow = _matrix.end(); 
-			iteratorDataRow = _matrix.end()->second.end(); 
+		bool operator==(const Iterator& rhs) const {
+			return 
+				this->iteratorDataRow == rhs.iteratorDataRow
+				&&
+				this->iteratorSetDataRow == rhs.iteratorSetDataRow;
+		}
+		bool operator!=(const Iterator& rhs) const {
+			return 
+				this->iteratorDataRow != rhs.iteratorDataRow
+				&&
+				this->iteratorSetDataRow != rhs.iteratorSetDataRow;
+		}
+		Iterator& operator++() {
+			++iteratorDataRow;
+			if (iteratorDataRow == iteratorSetDataRow->second.end()) {
+				++iteratorSetDataRow;
+				if (iteratorSetDataRow == _matrix.end()) { return *this;
+				} else iteratorDataRow = iteratorSetDataRow->second.begin();
+			};
 			return *this;
 		}
 		auto operator*() const {
@@ -83,27 +99,6 @@ std::cout << "operator*" << std::endl;
 					iteratorDataRow->second
 				);
 	    }
-		bool operator!=(const Iterator& rhs) const {
-			return 
-				this->iteratorDataRow != rhs.iteratorDataRow
-				&&
-				this->iteratorSetDataRow != rhs.iteratorSetDataRow;
-		}
-		bool operator==(const Iterator& rhs) const {
-			return 
-				this->iteratorDataRow == rhs.iteratorDataRow
-				&&
-				this->iteratorSetDataRow == rhs.iteratorSetDataRow;
-		}
-		Iterator& operator++() {
-			++iteratorDataRow;
-			if (iteratorDataRow == iteratorSetDataRow->second.end()) {
-				++iteratorSetDataRow;
-				iteratorDataRow = iteratorSetDataRow->second.begin();
-				if (*this == this->end()) return *this;
-			};
-			return *this;
-		}
 	};	
 
 	DataRow& operator[](size_t row) {return m_matrix[row];}
@@ -111,14 +106,22 @@ std::cout << "operator*" << std::endl;
 	Iterator begin() {return Iterator(m_matrix);}
 	Iterator end() {
 		Iterator iterator(m_matrix);
-		iterator.end();
+		iterator.finish();
 		return iterator;
 	}
 	
 	const size_t size() {
+		std::remove_if(this->begin(), this->end(),
+			[](auto & it){
+				auto& [row, column, value] = it; 
+				return value == defaultValue;
+			}
+		
+		);
+		if (m_matrix.empty()) return 0;
 		size_t size{};
 		std::for_each(m_matrix.begin(), m_matrix.end(),
-			[&size](auto x){size += x.second.size();}
+			[&size](auto & it){size += it.second.size();}
 		);
 		return size;
 	}
@@ -137,17 +140,17 @@ public:
 		m_matrix = *m_myMayrixPrt.get();
 	}
 
-	std::size_t size() {return m_matrix.size();}
+	const size_t size() {return m_matrix.size();}
 
 	auto& operator[] (size_t row) {return m_matrix[row];}
 
 	auto begin() {
-		size();
+		this->size();
 		return m_matrix.begin();
 	}
 
 	auto end() {
-		size();
+		this->size();
 		return m_matrix.end();
 	}
 };

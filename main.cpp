@@ -44,23 +44,23 @@ int main() {
 		assert(matrix[100][100] == 314);
 		assert(matrix.size() == 1);
 		matrix[99][100] = 314;
-	std::cout << matrix.size() << std::endl;
-		std::for_each(matrix.begin(), matrix.end(),
-			[](auto it){
-				auto [x, y, v] = it;
-	std::cout << x << y << v << std::endl;
-			}
-		);
+	// 	std::for_each(matrix.begin(), matrix.end(),
+	// 		[](auto it){
+	// 			auto [x, y, v] = it;
+	// std::cout << x << y << v << std::endl;
+	// 		}
+	// 	);
 		// выведется одна строка
 		// 100100314
-		// for(auto c: matrix)
-		// {
-		// int x;
-		// int y;
-		// int v;
-		// std::tie(x, y, v) = c;
-		// stdW::cout << x << y << v << std::endl;
-		// }
+		for(auto c: matrix)
+		{
+		int x;
+		int y;
+		int v;
+		std::tie(x, y, v) = c;
+		std::cout << x << y << v << std::endl;
+		}
+	std::cout << matrix.size() << std::endl;
 	}
 	// std::cout << matrix[100][100] << matrix.size() << std::endl;
 

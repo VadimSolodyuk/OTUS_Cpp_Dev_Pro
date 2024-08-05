@@ -5,7 +5,7 @@ project(matrix VERSION 0.0.${VERSION_PATCH})
 
 add_executable(matrix main.cpp)
 
-set_target_properties(matrix PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+set_target_properties(matrix PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON)
 
 # if (MSVC)
 #     target_compile_options(matrix PRIVATE /W4)

@@ -24,6 +24,10 @@
 
 5. ДЗ-05 (branch - "05_hw"):
   - задание: https://otusbook.notion.site/5-Editor-313162f725594aa1b29fcd8c502c6f7f;
-  - пакет для установки "Editor-0.0.2-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
+  - пакет для установки "Editor-0.0.X-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
   - наименование исполняемого бинарного файла "Editor".
 
+7. ДЗ-07 (branch - "07_hw"):
+  - задание: https://otusbook.notion.site/7-b1c3b4c26eb24a96843986612b4cc2ac;
+  - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
+  - наименование исполняемого бинарного файла "bulk".

@@ -1,0 +1,43 @@
+name: '10_hw-Bulk_server'
+
+on:
+  push:
+    branches:
+      - 10_hw
+      - feature/github_actions
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: sudo apt update && sudo apt install libboost-program-options-dev
+      - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
+      - run: cmake --build .
+      - run: cmake --build . --target package
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: hw_10.${{ github.run_number }}
+          release_name: Release hw_10.${{ github.run_number }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bulk-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: bulk-0.0.${{ github.run_number }}-Linux.deb
+          asset_content_type: application/vnd.debian.binary-package

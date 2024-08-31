@@ -1,9 +1,9 @@
-name: '11_hw'
+name: '06_hw'
 
 on:
   push:
     branches:
-      - 11_hw
+      - 06_hw
       - feature/github_actions
     paths-ignore:
       - '**.md'
@@ -17,11 +17,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: sudo apt update && sudo apt install
-          libboost-test-dev
-          libboost-system-dev
-          libboost-regex-dev
-          libboost-thread-dev -y
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
       - run: cmake --build . --target package
@@ -31,8 +26,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: hw_11.${{ github.run_number }}
-          release_name: Release hw_11.${{ github.run_number }}
+          tag_name: hw_06.${{ github.run_number }}
+          release_name: Release hw_06.${{ github.run_number }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -42,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./join_server-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: join_server-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./matrix-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: matrix-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package

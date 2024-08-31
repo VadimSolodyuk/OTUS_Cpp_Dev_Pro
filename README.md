@@ -9,7 +9,7 @@
 
 2. ДЗ-02 (branch - "02_hw"):
   - задание: https://otusbook.notion.site/2-IP-b0a89c0d1428422ea9446a9769ba6ffb;
-  - пакет для установки "ip_filter-0.0.X-Linux.deb" расположен в "Releases/Release hw_01.X", где X - номер версии;
+  - пакет для установки "ip_filter-0.0.X-Linux.deb" расположен в "Releases/Release hw_02.X", где X - номер версии;
   - наименование исполняемого бинарного файла "ip_filter".
 
 3. ДЗ-03 (branch - "03_hw"):
@@ -29,6 +29,6 @@
 
 7. ДЗ-07 (branch - "07_hw"):
   - задание: https://otusbook.notion.site/7-b1c3b4c26eb24a96843986612b4cc2ac;
-  - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
+  - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_07.X", где X - номер версии;
   - наименование исполняемого бинарного файла "bulk".
 

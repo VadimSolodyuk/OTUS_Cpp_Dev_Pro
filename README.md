@@ -9,7 +9,7 @@
 
 2. ДЗ-02 (branch - "02_hw"):
   - задание: https://otusbook.notion.site/2-IP-b0a89c0d1428422ea9446a9769ba6ffb;
-  - пакет для установки "ip_filter-0.0.X-Linux.deb" расположен в "Releases/Release hw_01.X", где X - номер версии;
+  - пакет для установки "ip_filter-0.0.X-Linux.deb" расположен в "Releases/Release hw_02.X", где X - номер версии;
   - наименование исполняемого бинарного файла "ip_filter".
 
 3. ДЗ-03 (branch - "03_hw"):
@@ -26,4 +26,9 @@
   - задание: https://otusbook.notion.site/5-Editor-313162f725594aa1b29fcd8c502c6f7f;
   - пакет для установки "Editor-0.0.2-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
   - наименование исполняемого бинарного файла "Editor".
+
+6. ДЗ-06 (branch - "06_hw"):
+  - задание: https://otusbook.notion.site/6-Matrix-0e8294a54bd04e01bb5337c976c84416;
+  - пакет для установки "matrix-0.0.2-Linux.deb" расположен в "Releases/Release hw_06.X", где X - номер версии;
+  - наименование исполняемого бинарного файла "matrix".
 

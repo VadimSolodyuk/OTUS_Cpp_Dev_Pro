@@ -27,6 +27,11 @@
   - пакет для установки "Editor-0.0.X-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
   - наименование исполняемого бинарного файла "Editor".
 
+6. ДЗ-06 (branch - "06_hw"):
+  - задание: https://otusbook.notion.site/6-Matrix-0e8294a54bd04e01bb5337c976c84416;
+  - пакет для установки "matrix-0.0.2-Linux.deb" расположен в "Releases/Release hw_06.X", где X - номер версии;
+  - наименование исполняемого бинарного файла "matrix".
+
 7. ДЗ-07 (branch - "07_hw"):
   - задание: https://otusbook.notion.site/7-b1c3b4c26eb24a96843986612b4cc2ac;
   - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;

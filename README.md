@@ -26,4 +26,3 @@
   - задание: https://otusbook.notion.site/5-Editor-313162f725594aa1b29fcd8c502c6f7f;
   - пакет для установки "Editor-0.0.2-Linux.deb" расположен в "Releases/Release hw_05.X", где X - номер версии;
   - наименование исполняемого бинарного файла "Editor".
-

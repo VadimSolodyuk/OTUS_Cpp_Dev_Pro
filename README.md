@@ -43,7 +43,12 @@
   - наименование исполняемого бинарного файла "test_async".
 
 10. ДЗ-10 (branch - "10_hw"):
-  - задание:;
+  - задание: https://otusbook.notion.site/10-55d9e0234c5d4c2cbc01e3a27e69f343;
   - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_10.X", где X - номер версии;
   - наименование исполняемого бинарного файла "bulk_server".
+
+11. ДЗ-11 (branch - "11_hw"):
+  - задание: https://otusbook.notion.site/11-Outer-join-cb1cfd2fb59f4b3d92978b0b7bab9d9a;
+  - пакет для установки "join_server-0.0.X-Linux.deb" расположен в "Releases/Release hw_11.X", где X - номер версии;
+  - наименование исполняемого бинарного файла "join_server".
 

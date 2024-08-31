@@ -31,6 +31,7 @@
   - задание: https://otusbook.notion.site/7-b1c3b4c26eb24a96843986612b4cc2ac;
   - пакет для установки "bulk-0.0.X-Linux.deb" расположен в "Releases/Release hw_07.X", где X - номер версии;
   - наименование исполняемого бинарного файла "bulk".
+    
 8. ДЗ-08 (branch - "08_hw"):
   - задание: https://otusbook.notion.site/8-Boost-16b3fc53a60f4ecfa855f1a0d0442628;
   - пакет для установки "bayan-0.0.X-Linux.deb" расположен в "Releases/Release hw_08.X", где X - номер версии;
